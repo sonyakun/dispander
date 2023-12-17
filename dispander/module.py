@@ -8,7 +8,7 @@ import re
 
 regex_discord_message_url = (
     '(?!<)https://(ptb.|canary.)?discord(app)?.com/channels/'
-    '(?P<guild>[0-9]{17,20})/(?P<channel>[0-9]{17,20})/(?P<message>[0-9]{17,20})(?!>)'
+    '(?P<guild>[0-9]{18,20})/(?P<channel>[0-9]{18,20})/(?P<message>[0-9]{18,20})(?!>)'
 )
 regex_extra_url = (
     r'\?base_aid=(?P<base_author_id>[0-9]{17,20})'
@@ -126,7 +126,7 @@ async def extract_message(message):
 
 
 async def fetch_message_from_id(guild, channel_id, message_id):
-    channel = guild.get_channel(channel_id)
+    channel = guild.get_channel_or_thread(channel_id)
     message = await channel.fetch_message(message_id)
     return message
 
