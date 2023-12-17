@@ -1,11 +1,11 @@
 # dispander (Discord Message URL Expander)
-DiscordのメッセージURLを検知して展開する機能を追加する discord.py Bot拡張用ライブラリ
+DiscordのメッセージURLを検知して展開する機能を追加する discord.py 2.0 Bot拡張用ライブラリ
 
 <img width="789" src="https://user-images.githubusercontent.com/11159059/70523586-bc7b8280-1b86-11ea-87f3-aa3dade6ba51.png">
 
 # 使い方
 
-`python3 -m pip install dispander`
+`python3 -m pip install git+https://github.com/sonyakun/dispander.git`
 
 ## extensionとして使用する場合
 
@@ -32,19 +32,19 @@ on_raw_reaction_addの場合はキーワード引数`payload`にRawReactionActio
 import discord
 from dispander import dispand, delete_dispand
 
-client = discord.Client()
+bot = commands.Bot()
 
-@client.event
+@bot.event
 async def on_message(message):
     if message.author.bot:
         return
     await dispand(message)
 
 
-@client.event
+@bot.event
 async def on_raw_reaction_add(payload):
-    await delete_dispand(client, payload=payload)
+    await delete_dispand(bot, payload=payload)
 
 
-client.run(token)
+bot.run(token)
 ```
